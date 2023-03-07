@@ -78,7 +78,7 @@
   - 인증코드를 입력하고 POST요청을 비동기로 날립니다. :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/d1189898b94e936211bd052f0d1c5df45fef8328/client/src/components/SignUpForm.jsx#L52)
 
 ### 4.2.2 Controller
-- **이메일 인증 요청 처리** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/f1ee8b3df44be9bfad4b5c91c54810878003842f/server/controller/Csignup.js#L18)
+- **이메일 인증 요청 처리** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/f1ee8b3df44be9bfad4b5c91c54810878003842f/server/controller/Csignup.js#L29)
  - 이메일 중복검사 통과 시 6자리의 숫자로 구성된 인증코드를 생성합니다.
  - 생성한 인증코드를 nodemailer를 통해 사용자가 입력한 이메일로 발송합니다. 
 
