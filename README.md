@@ -116,4 +116,114 @@
 </div>
 </details>
 
+## 5. 핵심 트러블 슈팅
+### 5.1. 로그인 후 메인페이지 렌더 오류 발생
+- 저는 가계부, 마이페이지 같은 페이지는 회원 개인정보가 담겨있기 때문에 보안 절차가 있어야 한다고 생각했습니다.
 
+- 따라서 접근하는 모든 요청은 토큰을 검증하는 미들웨어를 거치도록 했습니다. 엑세스 토큰이 있어야 접근 가능하게 하였고, **기존 코드** 와 같이 미들웨어를  axios interceptor로 토큰이 만료되었다면 리프레쉬 토큰을 통해 엑세스 토큰을 재발급해주도록 했습니다.
+
+<details>
+<summary><b>기존 코드</b></summary>
+<div markdown="1">
+
+~~~javascript
+import axios from 'axios';
+import axiosurl from '../url';
+
+const axiosJWT = axios.create();
+const accessToken = localStorage.getItem('accessToken');
+axiosJWT.defaults.headers.common['authorization'] = `Bearer ${accessToken}`;
+
+axiosJWT.interceptors.request.use(
+  async (config) => {
+    await axios
+      .get(axiosurl.interceptor1, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      .then(() => {
+        return config;
+      })
+      .catch(async (err2) => {
+        if (
+          err2.response.data.message === 'TokenExpiredError' ||
+          err2.response.data.message === 'TokenNull' ||
+          err2.response.data.message === 'JsonWebTokenError'
+        ) {
+          const rep = await axios.get(axiosurl.interceptor2);
+          const newAccessToken = rep.data.accessToken;
+          localStorage.setItem('accessToken', newAccessToken);
+          axiosJWT.defaults.headers.common[
+            'authorization'
+          ] = `Bearer ${newAccessToken}`;
+          console.log(newAccessToken);
+          config.headers.authorization = `Bearer ${newAccessToken}`;
+          return config;
+        } else {
+          alert('error!');
+          return Promise.reject(false);
+        }
+      });
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export default axiosJWT;
+~~~
+
+</div>
+</details>
+
+- 이 때 기존 엑세스 토큰이 만료되어 새로운 토큰을 발급해 준 후, 새로운 토큰으로 미들웨어에서 토큰검증을 거쳐야 했기 때문에
+- 아래 **개선된 코드**와 같이 새로 발급된 토큰을 React 화면단에서 새로 저장한 후 미들웨어를 거치도록 하여 페이지 렌더 오류를 개선하였습니다.
+<details>
+<summary><b>개선된 코드</b></summary>
+<div markdown="1">
+
+~~~javascript
+//헤더에 토큰을 새로 저장하는 함수
+const setToken = () => {
+  const accessToken = localStorage.getItem('accessToken');
+  axiosJWT.defaults.headers.common['authorization'] = `Bearer ${accessToken}`;
+};
+
+export default axiosJWT;
+
+//내보낸 함수를 React화면단에서 import하여 로그인 요청 응답을 받고 실행하게 함
+export { setToken };
+
+
+...
+  // 로그인 api 요청
+  function login() {
+    axios({
+      url: axiosurl.login,
+      method: 'POST',
+      withCredentials: true,
+      data: {
+        user_email: Email,
+        user_pw: Password,
+      },
+    })
+      .then((res) => {
+        const accessToken = res.data.accessToken;
+        console.log(res.data);
+        localStorage.setItem('accessToken', accessToken);
+        setToken();
+        navigate('/account');
+      })
+      .catch((error) => {
+        alert(error.response.data.msg);
+      });
+  }
+~~~
+
+</div>
+</details>
+
+
+</br>
