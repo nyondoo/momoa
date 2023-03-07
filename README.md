@@ -30,6 +30,8 @@
 ## 3. ERD 설계
 <img width="764" src="https://user-images.githubusercontent.com/116782318/221226448-e03cc19f-1242-492b-8663-7688ef9b2b6d.png">  
 
+</br>
+
 ## 4. 주요 구현 기능
 - 카카오 로그인 api와 회원가입 기능을 구현하였습니다.
 
@@ -67,6 +69,7 @@
   - jwt 엑세스 토큰은 localstorage에, 리프레쉬 토큰은 DB에 저장합니다.
   - 요청 처리 성공 시 메인 페이지를 렌더합니다.
 
+ </br>
 
 ### 4.2. 이메일 인증
 
