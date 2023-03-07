@@ -73,9 +73,9 @@
 
 ### 4.2.1 사용자 요청 
 
-- **Axios 비동기 요청** :pushpin: [코드 확인](https://github.com/nyondoo/mileeasy/blob/2961f19f5153e97090b62d15a886ee0ad1d3bbfc/views/mbtitest.ejs#L40)
-  - 이메일을 입력하고 POST요청을 비동기로 날립니다.
-  - 인증코드를 입력하고 POST요청을 비동기로 날립니다.
+- **Axios 비동기 요청** 
+  - 이메일을 입력하고 POST요청을 비동기로 날립니다. :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/d1189898b94e936211bd052f0d1c5df45fef8328/client/src/components/SignUpForm.jsx#L35)
+  - 인증코드를 입력하고 POST요청을 비동기로 날립니다. :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/d1189898b94e936211bd052f0d1c5df45fef8328/client/src/components/SignUpForm.jsx#L52)
 
 ### 4.2.2 Controller
 - **이메일 인증 요청 처리** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/f1ee8b3df44be9bfad4b5c91c54810878003842f/server/controller/Csignup.js#L18)
@@ -94,7 +94,7 @@
 
 ### 4.3.1 사용자 요청 
 
-- **Axios 비동기 요청** :pushpin: [코드 확인](https://github.com/nyondoo/mileeasy/blob/2961f19f5153e97090b62d15a886ee0ad1d3bbfc/views/mbtitest.ejs#L40)
+- **Axios 비동기 요청** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/d1189898b94e936211bd052f0d1c5df45fef8328/client/src/pages/InfoInit.jsx#L35)
   - 이름과 비밀번호를 입력한 후 POST 요청을 날립니다.
 
 ### 4.3.2 Controller
