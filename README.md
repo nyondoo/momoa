@@ -1,61 +1,114 @@
-# momoa 모모아
-소중한 내 돈을 모아모아~💰 모모아입니다.  
+# :pushpin: Momoa
+>공유 가계부 서비스
  
+- DEMO : (http://43.201.17.158:3001)
+</br>
+
 ## 프로젝트 소개
 모모아는 수입과 지출 관리, 분석을 위한 가계부 웹입니다. 또한 유저 간 공유 기능을 통해 가계부를 공동으로 관리할 수 있도록 했습니다.  
 
-#### 📍개발 기간
-2023.02.11 ~ 2023.02.25 (2주간)  
+## 1. 제작 기간 & 참여 인원
+- 2023.02.11 ~ 2023.02.25 
+- 팀 프로젝트(4명)
+- 담당 역할 : DB설계, MBTI테스트 , 사용자 여행지 추천(방명록)기능
 
-#### 👩🏻‍💻개발 인원
-김세현, 박의현, 김미정, 장현수(4명)  
+</br>
 
+## 2. 사용 기술
+#### `Back-end`
+  - Node.js
+  - Express
+  - MySQL
+  - Sequelize
+#### `Front-end`
+  - React
+  - Recoil
+  - React-Query
+  
+</br>
 
-## 🛠사용 기술 및 도구  
-
-### 프론트엔드  
-
-<p align="center">
-<img src="https://user-images.githubusercontent.com/116782318/221221091-dd10b2a0-81ce-4c90-a3a9-4aa62fbc3a19.jpeg" width=150px>
-<img src="https://user-images.githubusercontent.com/116782318/221221118-55a57d31-ff47-4b91-97f1-f187d51721af.png" width=150px>
-<img src="https://user-images.githubusercontent.com/116782318/221221136-09ea13be-dcd3-4ef4-a088-e6eabc5f9980.png" width=150px>
-<img src="https://user-images.githubusercontent.com/116782318/221221148-e59f8748-af6e-4a59-a2a1-54776c6aad73.png" width=150px>
-<img src="https://user-images.githubusercontent.com/116782318/221221789-ba381b5d-fcf8-4e41-b096-6563be23a6d7.svg" width=150px>
-</p>  
-
-### 백엔드  
-
-<p align="center">
-<img src="https://user-images.githubusercontent.com/116782318/221222020-f5513183-cda9-41d2-9f69-97e3168b1a24.png" width=150px>
-<img src="https://user-images.githubusercontent.com/116782318/221222036-701f3c26-f703-4337-b8b1-c2d111d2c10d.png" width=150px>
-<img src="https://user-images.githubusercontent.com/116782318/221222046-2ca88dfb-5e6b-4903-9d00-031843947fa9.png" width=150px>
-</p>  
-
-
-### 👥협업  
-
- <p align="center">
-<img src="https://user-images.githubusercontent.com/116782318/221222841-bfa66574-c548-43f5-8434-65e26fb35894.png" width=150px>
-<img src="https://user-images.githubusercontent.com/116782318/221222859-8a3ba5ea-ed13-482a-90b9-be838100223b.png" width=150px>
-<img src="https://user-images.githubusercontent.com/116782318/221222900-3d08c10e-3732-4a76-a77c-819e0624d129.png" width=150px>
-</p>  
-
-
-
-### ⚙️ERD  
-
+## 3. ERD 설계
 <img width="764" src="https://user-images.githubusercontent.com/116782318/221226448-e03cc19f-1242-492b-8663-7688ef9b2b6d.png">  
 
+## 4. 주요 구현 기능
+- 카카오 로그인 api와 회원가입 기능을 구현하였습니다.
+
+<details>
+<summary><b>핵심 기능 설명 펼치기</b></summary>
+<div markdown="1">
+
+### 4.1. 카카오 로그인 api
+  
+
+### 4.1.1 사용자 요청 
+
+- **인가코드 받기** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/f1ee8b3df44be9bfad4b5c91c54810878003842f/client/src/pages/Kakao.jsx#L11)
+  - 카카오 서버에 접근해 인가 코드를 받습니다.
+
+- **Axios 비동기 요청** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/f1ee8b3df44be9bfad4b5c91c54810878003842f/client/src/pages/Kakao.jsx#L14)
+  - 카카오 서버에서 받은 인가코드를 담은 POST 요청을 날립니다.
+
+### 4.1.2 Controller
+
+- **요청 처리 - 카카오 토큰 발급** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/f1ee8b3df44be9bfad4b5c91c54810878003842f/server/controller/Ckakao.js#L22)
+  - 카카오 서버로 인가코드를 담은 POST 비동기 요청을 날려 토큰을 요청합니다.
+  - 응답으로 사용자 정보를 요청할 때 사용할 카카오 엑세스 토큰과 리프레시 토큰을 받습니다.
+  
+- **요청 처리 - 사용자 정보 요청** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/f1ee8b3df44be9bfad4b5c91c54810878003842f/server/controller/Ckakao.js#L40)
+  - 헤더에 토큰을 담은 axios 요청을 날립니다.
+  - 응답으로 사용자 정보를 가져옵니다.
+  
+- **요청 처리 - 가입/로그인 처리** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/f1ee8b3df44be9bfad4b5c91c54810878003842f/server/controller/Ckakao.js#L52)
+  - 받아 온 사용자 정보를 DB에서 조회하여 가입 여부를 확인합니다.
+  - 이미 가입된 경우 JWT토큰을 발행하여 로그인 처리 해주고, 가입되지 않은 경우 DB에 유저정보를 저장 후 JWT토큰을 발행합니다.
+  - try-catch 문으로 예외처리 합니다.
+
+- **결과 응답** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/f1ee8b3df44be9bfad4b5c91c54810878003842f/server/controller/Ckakao.js#L146)
+  - jwt 엑세스 토큰은 localstorage에, 리프레쉬 토큰은 DB에 저장합니다.
+  - 요청 처리 성공 시 메인 페이지를 렌더합니다.
 
 
-## 💡UI/기능  
+### 4.2. 이메일 인증
 
-- 메인화면
-- 회원가입 nodemailer
-- 로그인 JWT, 카카오 로그인 api
-- 그래프
-- 라이브러리 없이 달력 구현
-- 가계부 CRUD
-- 가계부 공유(초대)  
+
+### 4.2.1 사용자 요청 
+
+- **Axios 비동기 요청** :pushpin: [코드 확인](https://github.com/nyondoo/mileeasy/blob/2961f19f5153e97090b62d15a886ee0ad1d3bbfc/views/mbtitest.ejs#L40)
+  - 이메일을 입력하고 POST요청을 비동기로 날립니다.
+  - 인증코드를 입력하고 POST요청을 비동기로 날립니다.
+
+### 4.2.2 Controller
+- **이메일 인증 요청 처리** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/f1ee8b3df44be9bfad4b5c91c54810878003842f/server/controller/Csignup.js#L18)
+ - 이메일 중복검사 통과 시 6자리의 숫자로 구성된 인증코드를 생성합니다.
+ - 생성한 인증코드를 nodemailer를 통해 사용자가 입력한 이메일로 발송합니다. 
+
+ - if문으로 인증코드 만료/불일치/성공의 경우로 예외처리 합니다.
+ 
+- **결과 응답** :pushpin: [코드 확인](https://github.com/nyondoo/mileeasy/blob/2961f19f5153e97090b62d15a886ee0ad1d3bbfc/controller/Cmbti_test.js#L81)
+  - 이메일 입력 후 인증코드 입력창을 렌더합니다.
+ 
+ </br>
+ 
+ ### 4.3 회원가입 및 로그인
+
+
+### 4.3.1 사용자 요청 
+
+- **Axios 비동기 요청** :pushpin: [코드 확인](https://github.com/nyondoo/mileeasy/blob/2961f19f5153e97090b62d15a886ee0ad1d3bbfc/views/mbtitest.ejs#L40)
+  - 이름과 비밀번호를 입력한 후 POST 요청을 날립니다.
+
+### 4.3.2 Controller
+- **인증코드 확인/회원가입 요청처리** :pushpin: [코드 확인](https://github.com/nyondoo/momoa/blob/f1ee8b3df44be9bfad4b5c91c54810878003842f/server/controller/Csignup.js#L73)
+ - 사용자가 입력한 인증코드를 확인합니다. 
+ - POST요청으로 넘어온 유저정보를 DB에 저장합니다.
+ - JWT토큰을 발급하고 access토큰은 localstorage에, refresh토큰은 DB 유저정보에 저장합니다.
+ - try-catch 문으로 예외처리 합니다.
+ 
+- **결과 응답** :pushpin: [코드 확인](https://github.com/nyondoo/mileeasy/blob/2961f19f5153e97090b62d15a886ee0ad1d3bbfc/controller/Cmbti_test.js#L81)
+  - 인증코드 검사 통과 시 유저 정보 입력화면을 렌더합니다. 
+  - 로그인 완료시 메인 화면을 렌더합니다.
+
+</div>
+</details>
 
 
