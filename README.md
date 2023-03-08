@@ -228,5 +228,7 @@ export { setToken };
 </div>
 </details>
 
-
 </br>
+
+## 6. 회고 / 느낀점
+>프로젝트 개발 회고 글: https://velog.io/@nyondoo/SeSACx%EC%BD%94%EB%94%A9%EC%98%A8-%EC%9B%B9-%ED%92%80%EC%8A%A4%ED%83%9D-2%EC%B0%A8-%ED%8C%80%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D
